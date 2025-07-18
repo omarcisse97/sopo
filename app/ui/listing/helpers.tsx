@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export const useCreateFilters = ({filterConfig, subCategories, currentFilters}) => {
+export const useCreateFilters = ({ filterConfig, subCategories, currentFilters }: {
+    filterConfig: any;
+    subCategories: any;
+    currentFilters: any;
+}) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -44,7 +48,7 @@ export const useCreateFilters = ({filterConfig, subCategories, currentFilters}) 
             {/* Dynamic filters from filterConfig */}
             {filterConfig.filters.map((filterDef) => {
                 if (filterDef.key === 'subcategory') return null; // Skip, already handled above
-                
+
                 return (
                     <div key={filterDef.key} className="mb-6">
                         <label className="block text-sm font-medium text-gray-700 mb-2">
