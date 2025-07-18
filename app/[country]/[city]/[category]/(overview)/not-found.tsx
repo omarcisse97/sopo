@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { countries } from '@/app/data/locations';
 import { categories } from '@/app/data/categories';
-import { City, Country, Option } from '@/app/lib/definition';
+import { Category, City, Country, Option } from '@/app/lib/definition';
 import { Header } from '@/app/ui/home/nav';
 import { FilterSidebar } from '@/app/ui/listing/filters';
 
@@ -102,7 +102,7 @@ export default function NotFound() {
                                 {(tmp_category || current_category) && (
                                     <FilterSidebar
                                         selectedFilters={{}}
-                                        category={tmp_category || current_category}
+                                        category={(tmp_category || current_category) as Category}
                                     />
                                 )}
                             </div>
@@ -114,7 +114,7 @@ export default function NotFound() {
                         {(tmp_category || current_category) && (
                             <FilterSidebar
                                 selectedFilters={{}}
-                                category={tmp_category || current_category}
+                                category={(tmp_category || current_category) as Category}
                             />
                         )}
                     </div>
