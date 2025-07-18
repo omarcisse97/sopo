@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export const createFilters = ({filterConfig, subCategories, currentFilters}) => {
+export const useCreateFilters = ({filterConfig, subCategories, currentFilters}) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
