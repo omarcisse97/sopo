@@ -3,8 +3,8 @@ import { Country, City } from '@/app/lib/definition';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-export default function UnderConstructionPage(props: { params: { country: string, city: string}}) {
-    const params = props.params;
+export default async function UnderConstructionPage(props: { params: Promise<{ country: string, city: string}>}) {
+    const params = await props.params;
     const country_slug = params.country;
     const city_slug = params.city;
 
