@@ -11,7 +11,7 @@ const Page = async (props: { params: Promise<{ country: string, city: string }> 
   const citySlug = params.city;
   const country = getCountries(countrySlug) as Country;
   const city = getCities(countrySlug, citySlug) as City;
-  const categories = await getCategories(true, true, countrySlug, citySlug, null) as Category[];
+  const categories = await getCategories(false, false, countrySlug, citySlug, null) as Category[];
   
   if (!country || !city || !categories) {
     notFound();
@@ -55,9 +55,6 @@ const Page = async (props: { params: Promise<{ country: string, city: string }> 
                   >
                     {category.name}
                   </Link>
-                  <p className="text-sm text-gray-500">
-                    {category.subcategories.reduce((acc, sub) => acc + (sub.count || 0), 0)} listings
-                  </p>
                 </div>
               </div>
 
@@ -71,9 +68,7 @@ const Page = async (props: { params: Promise<{ country: string, city: string }> 
                     >
                       {sub.name}
                     </Link>
-                    <span className="text-gray-500 text-xs bg-gray-100 px-2 py-1 rounded-full ml-2">
-                      {sub.count || 0}
-                    </span>
+                    
                   </div>
                 ))}
                 
