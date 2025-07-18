@@ -323,9 +323,10 @@ export default async function ListingPage(props: { params: Promise<{ country: st
     );
 }
 
-// Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { id: string } }) {
-    const listing = await getListing(params.id);
+
+export async function generateMetadata({ params }: { params: Promise<{ country: string, city: string, category: string, id: string }> }) {
+    const resolvedParams = await params;
+    const listing = await getListing(resolvedParams.id);
 
     if (!listing) {
         return {
