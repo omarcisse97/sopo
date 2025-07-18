@@ -99,20 +99,24 @@ export default function NotFound() {
                                 </svg>
                             </summary>
                             <div className="mt-2">
-                                <FilterSidebar
-                                    selectedFilters={{}}
-                                    category={tmp_category ? tmp_category : current_category}
-                                />
+                                {(tmp_category || current_category) && (
+                                    <FilterSidebar
+                                        selectedFilters={{}}
+                                        category={tmp_category || current_category}
+                                    />
+                                )}
                             </div>
                         </details>
                     </div>
 
                     {/* Desktop Sidebar */}
                     <div className="hidden lg:block lg:w-64 xl:w-72">
-                        <FilterSidebar
-                            selectedFilters={{}}
-                            category={tmp_category ? tmp_category : current_category}
-                        />
+                        {(tmp_category || current_category) && (
+                            <FilterSidebar
+                                selectedFilters={{}}
+                                category={tmp_category || current_category}
+                            />
+                        )}
                     </div>
 
                     <div className="flex-1 min-w-0">
