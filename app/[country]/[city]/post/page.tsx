@@ -6,13 +6,13 @@ import { PreviousURL } from "@/app/lib/definition";
 
 
 
-const Page = (
+const Page = async(
   props: { 
-    params: { country: string, city: string} ,
-    searchParams?: { previousURL?: string | null }}
+    params: Promise<{ country: string, city: string}> ,
+    searchParams?: Promise<{ previousURL?: string | null }>}
 ) => {
-  const params = props.params;
-  const searchParams = props.searchParams ?? null;
+  const params = await props.params;
+  const searchParams = await props.searchParams ?? null;
   const country_slug = params.country;
   const city_slug = params.city;
   let previousURL: PreviousURL | null = null;
