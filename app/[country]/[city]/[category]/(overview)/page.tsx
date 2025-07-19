@@ -14,6 +14,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Listing, Category, City, Country, PreviousURL } from "@/app/lib/definition";
 import { createCurrentURL } from "@/app/lib/helpers";
+import Image from "next/image";
 
 
 const validateSearchParams = (searchParams: Record<string, string | null>, category: Category) => {
@@ -110,6 +111,7 @@ const Page = async (
         url: createCurrentURL(`/${country.slug}/${city.slug}/${category.slug}`, searchParamsEnhanced)
     }
     console.log('CATEGORY -> ', category);
+    console.log('Listings -> ', listings);
     return (
         <>
             <Header country={country} city={city} currentURL={currentURL} />
@@ -175,9 +177,24 @@ const Page = async (
                                         <Link href={`/${country.slug}/${city.slug}/${category.slug}/${listing.id}`}>
                                             <div className="cursor-pointer hover:bg-gray-50">
                                                 {/* Image */}
-                                                <div className="w-full h-40 sm:h-48 bg-gray-200 flex items-center justify-center">
-                                                    <span className="text-gray-500 text-sm">No Image</span>
-                                                </div>
+                                                {(!listing.images || listing.images.length === 0) &&
+                                                    <div className="w-full h-40 sm:h-48 bg-gray-100 flex items-center justify-center">
+                                                        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        </svg>
+                                                    </div>}
+                                                {listing.images && listing.images.length >= 1 &&
+                                                    <Image
+                                                        src={listing.images[0]}
+                                                        alt="Listing"
+                                                        width={400}
+                                                        height={192}
+                                                        className="w-full h-40 sm:h-48 object-cover"
+                                                    />}
+
 
                                                 <div className="p-4">
                                                     <h3 className="text-blue-600 hover:underline font-medium mb-2 line-clamp-2 text-sm sm:text-base">
@@ -273,7 +290,7 @@ const Page = async (
                             ))}
                         </div>
                     </div>
-                    
+
 
 
                     {/* Bottom footer */}
